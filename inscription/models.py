@@ -31,4 +31,6 @@ class Inscription(models.Model):
 
 
 class Photo(PhotoBase):
-    pass
+    description = models.TextField(blank=True,
+                                   null=True,
+                                   verbose_name=_("description"))
