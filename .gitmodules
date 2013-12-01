@@ -1,3 +1,6 @@
 [submodule "utils"]
 	path = utils
 	url = https://github.com/lxdiyun/django_util.git
+[submodule "django-debug-toolbar"]
+	path = django-debug-toolbar
+	url = https://github.com/django-debug-toolbar/django-debug-toolbar.git
