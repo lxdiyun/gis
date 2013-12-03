@@ -3,16 +3,16 @@
 		<h5>{{ inscription.name }}</h5>
 		<p>{{ inscription.description|linebreaks }}</p>
 	</div>
-	<div class="col-md-5" id="inscription_info">
+	<div class="col-md-8" id="inscription_info">
 		{% if photos.count  %}
 		<p ><strong >图片:</strong> </p>
-		<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
+		<div id="links">
 			{% for photo in photos %}
-			<a href="{{ photo.image.url }}" target="_blank" title="{{ photo.name }}" data-gallery="gallery">
-				<img class="img-polaroid" src="{{ photo.thumbnail.url }}">
+			<a href="{{ photo.image.url }}" title="{{ photo.name }}" data-gallery="">
+				<img class="img-polaroid" src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}">
 			</a>
 			{% endfor %}
-</div>
+		</div>
 	</div>
 </div>
 

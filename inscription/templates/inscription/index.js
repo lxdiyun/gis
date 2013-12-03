@@ -1,6 +1,7 @@
 $(document).ready(init);
 
 function init() {
+	// map
 	var map;
 	var mapOption = { 
 		div: '#map', 
@@ -27,6 +28,10 @@ function init() {
 	map = new GMaps(mapOption);
 
 	addMarker(map);
+
+	//image-gallery
+	$('#blueimp-gallery').data('useBootstrapModal', false);
+	$('#blueimp-gallery').toggleClass('blueimp-gallery-controls', true); 
 }
 
 function addMarker(map) {
