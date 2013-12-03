@@ -1,14 +1,20 @@
-<h5>{{ inscription.name }}</h5>
-<p><strong>简介:</strong>{{ inscription.description }}</p>
-
-
-{% if photos.count  %}
-<p ><strong >Photo:</strong> </p>
-<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
-	{% for photo in photos %}
-	<a href="{{ photo.image.url }}" target="_blank" title="{{ photo.name }}" data-gallery="gallery">
-		<img class="img-polaroid" src="{{ photo.thumbnail.url }}">
-	</a>
-	{% endfor %}
+<div class="row">
+	<div class="col-md-4" id="sub_location_info">
+		<h5>{{ inscription.name }}</h5>
+		<p>{{ inscription.description|linebreaks }}</p>
+	</div>
+	<div class="col-md-5" id="inscription_info">
+		{% if photos.count  %}
+		<p ><strong >图片:</strong> </p>
+		<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
+			{% for photo in photos %}
+			<a href="{{ photo.image.url }}" target="_blank" title="{{ photo.name }}" data-gallery="gallery">
+				<img class="img-polaroid" src="{{ photo.thumbnail.url }}">
+			</a>
+			{% endfor %}
 </div>
+	</div>
+</div>
+
+
 {% endif %}

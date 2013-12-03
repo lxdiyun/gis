@@ -88,6 +88,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/adli/gis/static/'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -97,6 +98,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'dajaxice.finders.DajaxiceFinder',
 )
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/adli/gis/media/'
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyC0EnKraozzSAB8B5fqSN3w-vFWChYdWIQ'
 GOOGLE_MAPS_API_URL = 'http://ditu.google.cn/maps/api/js'
