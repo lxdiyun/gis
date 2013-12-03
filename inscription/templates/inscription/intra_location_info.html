@@ -1,4 +1,4 @@
-<h3>{{ location.name }}</h3>
+<h4>{{ location.name }}</h4>
 <p><strong>地址:</strong>{{ location.address }}</p>
 {% if location.description %}
 <p><strong>简介:</strong>{{ location.description }}</p>
@@ -6,17 +6,6 @@
 
 <ul>
 	{% for sub_loc in location.sublocation_set.all %}
-	<li>{{ sub_loc.name }}</li>
+	<li><a onclick="display_sub_location({{ sub_loc.id }})" href="#">{{ sub_loc }}</a></li>
 	{% endfor %}
 </ul>
-
-{% if photos.count  %}
-<p ><strong >Photo:</strong> </p>
-<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
-	{% for photo in photos %}
-	<a href="{{ photo.image.url }}" target="_blank" title="{{ photo.name }}" data-gallery="gallery">
-		<img class="img-polaroid" src="{{ photo.thumbnail.url }}">
-	</a>
-	{% endfor %}
-</div>
-{% endif %}

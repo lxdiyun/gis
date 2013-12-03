@@ -1,0 +1,14 @@
+<h5>{{ inscription.name }}</h5>
+<p><strong>简介:</strong>{{ inscription.description }}</p>
+
+
+{% if photos.count  %}
+<p ><strong >Photo:</strong> </p>
+<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
+	{% for photo in photos %}
+	<a href="{{ photo.image.url }}" target="_blank" title="{{ photo.name }}" data-gallery="gallery">
+		<img class="img-polaroid" src="{{ photo.thumbnail.url }}">
+	</a>
+	{% endfor %}
+</div>
+{% endif %}
