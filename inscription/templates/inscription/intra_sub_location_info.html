@@ -1,5 +1,8 @@
 <h4>{{ sub_location.name }}</h4>
+
+{% if sub_location.description %}
 <p><strong>简介:</strong>{{ sub_location.description }}</p>
+{% endif  %}
 
 <ul>
 	{% for inscription in sub_location.inscription_set.all %}

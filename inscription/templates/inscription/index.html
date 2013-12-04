@@ -9,7 +9,7 @@
 {% block extra_head %}
 {% dajaxice_js_import %}
 
-{% include "utils/bootstrap-image/head.html" %}
+{% include "utils/prettyPhoto/head.html" %}
 {% endblock %}
 
 
@@ -27,9 +27,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3" id="sub_location_info">
+		<div class="col-md-4" id="sub_location_info">
 		</div>
-		<div class="col-md-9" id="inscription_info">
+		<div class="col-md-8" id="inscription_info">
 		</div>
 	</div>
 </div>
@@ -42,7 +42,7 @@
 <script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
 
-{% include "utils/bootstrap-image/tail.html" %}
+{% include "utils/prettyPhoto/tail.html" %}
 
 <script type="text/javascript">
 {% include "inscription/index.js" %}
