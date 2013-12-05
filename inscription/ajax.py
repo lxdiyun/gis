@@ -1,8 +1,22 @@
-from dajax.core import Dajax
-from dajaxice.decorators import dajaxice_register
 from django.template.loader import render_to_string
 from django.core.exceptions import ObjectDoesNotExist
+from django.core import serializers
+
+from dajax.core import Dajax
+from dajaxice.decorators import dajaxice_register
+
 from models import Location, SubLocation, Inscription
+
+
+@dajaxice_register
+def get_all_locations(request):
+    dajax = Dajax()
+    locations = list(Location.objects.all())
+    data = serializers.serialize("json", locations)
+    print(data)
+    dajax.add_data(data, 'addLocations')
+
+    return dajax.json()
 
 
 @dajaxice_register

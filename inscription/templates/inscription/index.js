@@ -1,8 +1,9 @@
 $(document).ready(init);
 
+
+var map;
 function init() {
 	// map
-	var map;
 	var mapOption = { 
 		div: '#map', 
 		zoom: 12,
@@ -27,26 +28,40 @@ function init() {
 	};
 	map = new GMaps(mapOption);
 
-	addMarker(map);
+	request_locations();
 
 	//image-gallery
 	$('#blueimp-gallery').data('useBootstrapModal', false);
 	$('#blueimp-gallery').toggleClass('blueimp-gallery-controls', true); 
 }
 
+function request_locations() {
+	Dajaxice.inscription.get_all_locations(Dajax.process);
+}
+
+function addLocations(data) {
+	var infowindow = new google.maps.InfoWindow();
+	var locations = $.parseJSON(data)
+	for (var i = 0; i < locations.length; ++i) {
+		var loc = locations[i].fields;
+		marker = GMaps.prototype.createMarker({
+			lat: loc.latitude,
+			lng: loc.longitude,
+			title: loc.name
+		});
+		marker.id = locations[i].pk;
+		map.addMarker(marker);
+		addListerner(marker, infowindow);
+	};
+}
+
+
 function addMarker(map) {
 	var marker;
 	var infowindow = new google.maps.InfoWindow();
 
 	{% for loc in locations %}
-	marker = GMaps.prototype.createMarker({
-		lat: {{ loc.latitude }},
-		lng: {{ loc.longitude }},
-		title: "{{ loc }}"
-	});
 	marker.id = {{ loc.id }}
-	map.addMarker(marker);
-	addListerner(marker, infowindow);
 
 	{% endfor %}
 }
