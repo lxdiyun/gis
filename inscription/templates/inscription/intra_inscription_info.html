@@ -1,20 +1,26 @@
 <div class="row">
-	<div class="col-md-5" id="sub_location_info">
-		<h5>{{ inscription.name }}</h5>
+	<div class="col-md-6" id="sub_location_info">
+		<h4>{{ inscription.name }}</h4>
 		{% if inscription.description %}
-		<p>{{ inscription.description|linebreaks }}</p>
+		<div class="well">{{ inscription.description|linebreaks }}</div>
 		{% endif %}
 	</div>
-	<div class="col-md-7" id="inscription_info">
+	<div class="col-md-6" id="inscription_info">
 		{% if photos.count  %}
-		<p ><strong >图片:</strong> </p>
-		<div id="links text-right">
+		<h5>图片:</h5> 
+		<div id="links text-right" class="row">
 			{% for photo in photos %}
-			<a href="{{ photo.image.url }}" rel="prettyPhoto[inscription]" title="{{ photo.description }}">
-				<img src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}" title="{{ photo.name }}"/>
-			</a>
+			<div class="col-md-3 text-center">
+				<a class="" href="{{ photo.image.url }}" rel="prettyPhoto[inscription]" title="{{ photo.description }}">
+					<img class="img-thumbnail" src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}" />
+					<div class="caption">
+						{{ photo.name }}
+					</div>
+				</a>
+			</div>
 			{% endfor %}
 		</div>
+		{% endif %}
 	</div>
 </div>
 
@@ -23,4 +29,3 @@
 </script>
 
 
-{% endif %}

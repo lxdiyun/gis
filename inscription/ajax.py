@@ -13,7 +13,6 @@ def get_all_locations(request):
     dajax = Dajax()
     locations = list(Location.objects.all())
     data = serializers.serialize("json", locations)
-    print(data)
     dajax.add_data(data, 'addLocations')
 
     return dajax.json()

@@ -1,11 +1,15 @@
-<h3>{{ location.name }}</h3>
+<h2>{{ location.name }}</h2>
 <p><strong>地址:</strong>{{ location.address }}</p>
 {% if location.description %}
 <p><strong>简介:</strong>{{ location.description }}</p>
 {% endif %}
 
-<ul>
+<div class="list-group" id="sub_location_list">
 	{% for sub_loc in location.sublocation_set.all %}
-	<li><a onclick="display_sub_location({{ sub_loc.id }})" href="#">{{ sub_loc }}</a></li>
+	<a class="list-group-item" id="{{ sub_loc.id }}" href="#sub_location_info">{{ sub_loc }}</a>
 	{% endfor %}
-</ul>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+{% include "inscription/intra_location_info.js" %}
+</script>

@@ -7,9 +7,11 @@
 
 
 {% block extra_head %}
+{{ block.super }}
 {% dajaxice_js_import %}
 
 {% include "utils/prettyPhoto/head.html" %}
+
 {% endblock %}
 
 
@@ -18,6 +20,13 @@
 
 {% block content %}
 <div class="container">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#">总览</a></li>
+		<li ><a href="#">中山公园片</a></li>
+		<li><a href="#">礐石片</a></li>
+		<li><a href="#">妈屿片</a></li>
+	</ul>
+
 	<div class="row">
 		<div class="col-md-8">
 			<div  class="map_canvas img-polaroid" style="height:320px" id="map">
@@ -27,9 +36,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4" id="sub_location_info">
+		<div class="col-md-3" id="sub_location_info">
 		</div>
-		<div class="col-md-8" id="inscription_info">
+		<div class="col-md-9" id="inscription_info">
 		</div>
 	</div>
 </div>

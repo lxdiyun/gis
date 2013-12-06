@@ -79,12 +79,3 @@ function display_location(id) {
 	$("#sub_location_info" ).empty();
 	$("#inscription_info" ).empty();
 }
-
-function display_sub_location(id) {
-	Dajaxice.inscription.display_sub_location(Dajax.process,{'sub_location_id':id});
-	$("#inscription_info" ).empty();
-}
-
-function display_inscription(id) {
-	Dajaxice.inscription.display_inscription(Dajax.process,{'inscription_id':id});
-}
