@@ -5,7 +5,7 @@ from django.core import serializers
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 
-from models import Location, SubLocation, Inscription
+from models import Area, Location, SubLocation, Inscription
 
 
 @dajaxice_register
@@ -19,12 +19,30 @@ def get_all_locations(request):
 
 
 @dajaxice_register
+def display_area(request, area_id=None):
+    area = None
+
+    if area_id is not None:
+        id = int(area_id)
+        try:
+            area = Area.objects.get(id=id)
+        except ObjectDoesNotExist:
+            area = None
+
+    render = render_to_string('inscription/intra_area_info.html',
+                              {'area': area})
+    dajax = Dajax()
+    dajax.assign('#area_info', 'innerHTML', render)
+    return dajax.json()
+
+
+@dajaxice_register
 def display_location(request, location_id):
-    pid = int(location_id)
+    id = int(location_id)
     location = None
 
     try:
-        location = Location.objects.get(id=pid)
+        location = Location.objects.get(id=id)
     except ObjectDoesNotExist:
         location = None
 
@@ -38,11 +56,11 @@ def display_location(request, location_id):
 
 @dajaxice_register
 def display_sub_location(request, sub_location_id):
-    pid = int(sub_location_id)
+    id = int(sub_location_id)
     sub_location = None
 
     try:
-        sub_location = SubLocation.objects.get(id=pid)
+        sub_location = SubLocation.objects.get(id=id)
     except ObjectDoesNotExist:
         sub_location = None
 
@@ -56,12 +74,12 @@ def display_sub_location(request, sub_location_id):
 
 @dajaxice_register
 def display_inscription(request, inscription_id):
-    pid = int(inscription_id)
+    id = int(inscription_id)
     inscription = None
     photos = None
 
     try:
-        inscription = Inscription.objects.get(id=pid)
+        inscription = Inscription.objects.get(id=id)
     except ObjectDoesNotExist:
         inscription = None
 

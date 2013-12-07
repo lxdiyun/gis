@@ -4,12 +4,15 @@
 <p><strong>简介:</strong>{{ location.description }}</p>
 {% endif %}
 
-<div class="list-group" id="sub_location_list">
-	{% for sub_loc in location.sublocation_set.all %}
-	<a class="list-group-item" id="{{ sub_loc.id }}" href="#sub_location_info">{{ sub_loc }}</a>
-	{% endfor %}
+<div class="col-xs-8">
+	<ul class="nav nav-pills nav-stacked" id="sub_location_list">
+		{% for sub_loc in location.sublocation_set.all %}
+		<li><a class="" id="{{ sub_loc.id }}" href="#sub_location_info">{{ sub_loc }}</a></li>
+		{% endfor %}
+	</ul>
 </div>
 
-<script type="text/javascript" charset="utf-8">
+
+<script type="text/javascript">
 {% include "inscription/intra_location_info.js" %}
 </script>

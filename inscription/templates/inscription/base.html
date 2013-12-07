@@ -1,12 +1,10 @@
 {% extends "utils/site_base_b3.html" %}
 
 {% block extra_head %}
-<style type="text/css">
-{% include "inscription/base.css" %}
-</style>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}inscription/base.css">
 {% endblock %}
 
-{% block nav %}
+{% block navbar %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
@@ -17,7 +15,7 @@
 				<li {% block  index %} {% endblock %}><a href="{% url 'inscription_index' %}">地图</a></li>
 				<li><a href="#">碑铭列表</a></li>
 			</ul>
-			<form class="navbar-form navbar-right" role="search" action="#" method="POST">
+			<form class="navbar-form navbar-left" role="search" action="#" method="POST">
 				<div class="form-group">
 					<input class="form-control" style="padding: 0 32px 0 8px;" type="text" placeholder="搜索碑铭" name="keyword">
 					<button class="btn-link" style="position: relative; left: 200px; top: -28px;"type="submit">
@@ -26,8 +24,26 @@
 				</div>
 				{% csrf_token %}
 			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+				<a href="#">关于我们</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </nav>
+{% endblock %}
 
+{% block footer %}
+<footer class="footer">
+	<div class="container text-center">
+		<p>本系统由 汕头大学“基督宗教、生命教育与宗教文化” 研究专项资助</p>
+		<strong>业务联系邮箱</strong>
+		<a href="mailto:cjs@stu.edu.cn"><span class="glyphicon glyphicon-envelope"></span></a>
+		<strong>技术支持邮箱</strong>
+		<a href="mailto:xdli@stu.edu.cn"><span class="glyphicon glyphicon-envelope"></span></a>
+		</p>
+		<p><a style="color: rgb(255,255,255)" href="{% url 'admin:index' %}">后台管理</a></p>
+	</div>
+</footer>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 from utils.admin import PointAdminBase, PhotoInlineBase
-from models import Location, SubLocation, Inscription, Photo
+from models import Area, Location, SubLocation, Inscription, Photo
 
 
 class PhotoInline(PhotoInlineBase):
@@ -10,6 +10,7 @@ class PhotoInline(PhotoInlineBase):
 class InscriptionAdmin(admin.ModelAdmin):
     inlines = [PhotoInline]
 
+admin.site.register(Area)
 admin.site.register(Location, PointAdminBase)
 admin.site.register(SubLocation)
 admin.site.register(Inscription, InscriptionAdmin)
