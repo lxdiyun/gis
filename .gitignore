@@ -41,6 +41,6 @@ nosetests.xml
 #vim
 *.swp
 
-static/
-media/
+./static/
+./media/
 CACHE/
