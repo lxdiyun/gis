@@ -5,29 +5,35 @@
 {% endblock %}
 
 {% block navbar %}
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<p class="navbar-brand">汕头埠宗教碑铭地理信息系统<p>
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<p class="navbar-brand active" style="color:#FFFFFF"><strong>汕头埠宗教碑铭地理信息系统</strong></p>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li {% block  index %} {% endblock %}><a href="{% url 'inscription_index' %}">地图</a></li>
 				<li><a href="#">碑铭列表</a></li>
 			</ul>
-			<form class="navbar-form navbar-left" role="search" action="#" method="POST">
-				<div class="form-group">
-					<input class="form-control" style="padding: 0 32px 0 8px;" type="text" placeholder="搜索碑铭" name="keyword">
-					<button class="btn-link" style="position: relative; left: 200px; top: -28px;"type="submit">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</div>
-				{% csrf_token %}
-			</form>
+				<form class="navbar-form" role="search" action="#" method="POST">
+					<div class="input-group col-xs-12 col-sm-3">
+						<input class="form-control"  type="text" placeholder="搜索碑铭" name="keyword">
+						<div class="input-group-btn">
+							<button class="btn btn-info" style="" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+					{% csrf_token %}
+				</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li>
-				<a href="#">关于我们</a>
-				</li>
+				<li><a href="#">关于我们</a></li>
 			</ul>
 		</div>
 	</div>
