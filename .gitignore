@@ -1,3 +1,7 @@
+
+/static
+/media
+
 *.py[cod]
 
 # C extensions
@@ -40,7 +44,3 @@ nosetests.xml
 
 #vim
 *.swp
-
-./static/
-./media/*
-CACHE/
