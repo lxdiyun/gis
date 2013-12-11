@@ -12,7 +12,7 @@
 			{% for photo in photos %}
 			<div class="col-xs-3 col-sm-3 text-center">
 				<a  href="{{ photo.image.url }}" rel="prettyPhoto[inscription]" title="{{ photo.description }}">
-					<img class="img-thumbnail" src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}" />
+					<img class="img-thumbnail box-shadow" src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}" />
 					<div class="caption">
 						{{ photo.name }}
 					</div>

@@ -42,5 +42,5 @@ nosetests.xml
 *.swp
 
 ./static/
-./media/
+./media/*
 CACHE/
