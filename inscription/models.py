@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes import generic
 from django.utils.encoding import smart_unicode
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from utils.models import PointBase, PhotoBase
 
@@ -49,6 +50,9 @@ class Inscription(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.name)
+
+    def get_absolute_url(self):
+                return reverse("inscription_detail", kwargs={'pk': self.id})
 
 
 class Photo(PhotoBase):
