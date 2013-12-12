@@ -82,12 +82,8 @@ def display_inscription(request, inscription_id):
     except ObjectDoesNotExist:
         inscription = None
 
-    if inscription is not None:
-        photos = inscription.photos.all()
-
     render = render_to_string('inscription/intra_inscription_info.html',
-                              {'inscription': inscription,
-                               'photos': photos})
+                              {'inscription': inscription})
 
     dajax = Dajax()
     dajax.assign('#inscription_info', 'innerHTML', render)
