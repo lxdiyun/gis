@@ -4,11 +4,7 @@ function index_init() {
 	$('#map').fadeOut('fast');
 	$('#map').fadeIn('slow');
 
-	request_locations();
-
-	//image-gallery
-	$('#blueimp-gallery').data('useBootstrapModal', false);
-	$('#blueimp-gallery').toggleClass('blueimp-gallery-controls', true); 
+	Dajaxice.inscription.display_area(Dajax.process);
 }
 
 var map;
@@ -38,11 +34,8 @@ function load_map() {
 	map = new GMaps(mapOption);
 }
 
-function request_locations() {
-	Dajaxice.inscription.get_all_locations(Dajax.process);
-}
-
-function addLocations(data) {
+var markers = [];
+function add_locations(data) {
 	var infowindow = new google.maps.InfoWindow();
 	var locations = $.parseJSON(data)
 		for (var i = 0; i < locations.length; ++i) {
@@ -50,15 +43,28 @@ function addLocations(data) {
 			marker = GMaps.prototype.createMarker({
 				lat: loc.latitude,
 			       lng: loc.longitude,
-			       title: loc.name
+			       title: loc.name,
+			       animation: google.maps.Animation.DROP
 			});
 			marker.id = locations[i].pk;
+			markers.push(marker);
 			map.addMarker(marker);
-			addListerner(marker, infowindow);
+			add_listener(marker, infowindow);
 		};
 }
 
-function addListerner(marker, infowindow) {
+function set_all_map(map) {
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(map);
+	}
+}
+
+function clean_all_locations() {
+	set_all_map(null);
+	markers.length = 0;
+}
+
+function add_listener(marker, infowindow) {
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(marker.title);
 		infowindow.open(marker.get('map'), marker);
