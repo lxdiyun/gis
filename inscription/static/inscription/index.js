@@ -4,7 +4,7 @@ function index_init() {
 	$('#map').fadeOut('fast');
 	$('#map').fadeIn('slow');
 
-	Dajaxice.inscription.display_area(Dajax.process);
+	Dajaxice.inscription.display_area(Dajax.process, {'area_id':1});
 }
 
 var map;
