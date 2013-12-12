@@ -2,10 +2,12 @@
 	background: none repeat scroll 0 0 #FFFFFF;
 	border-radius: 2px 2px 2px 2px;
 	box-shadow: 2px 2px 8px black;
-	padding: 15px;
+	padding: 8px;
 	margin-top: 5px;
 }
 
 .box-shadow {
 	box-shadow: 2px 2px 8px black;
+	margin-top: 8px;
+	margin-bottom: 5px;
 }

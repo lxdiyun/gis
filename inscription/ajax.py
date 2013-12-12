@@ -9,29 +9,27 @@ from models import Area, Location, SubLocation, Inscription
 
 
 @dajaxice_register
-def get_all_locations(request):
-    dajax = Dajax()
-    locations = list(Location.objects.all())
-    data = serializers.serialize("json", locations)
-    dajax.add_data(data, 'addLocations')
-
-    return dajax.json()
-
-
-@dajaxice_register
 def display_area(request, area_id=None):
     area = None
+    locations = None
 
     if area_id is not None:
         id = int(area_id)
         try:
             area = Area.objects.get(id=id)
+            locations = area.location_set.all()
         except ObjectDoesNotExist:
             area = None
+
+    else:
+        locations = Location.objects.all()
 
     render = render_to_string('inscription/intra_area_info.html',
                               {'area': area})
     dajax = Dajax()
+    if locations is not None:
+        data = serializers.serialize("json", locations)
+        dajax.add_data(data, 'add_locations')
     dajax.assign('#area_info', 'innerHTML', render)
     return dajax.json()
 

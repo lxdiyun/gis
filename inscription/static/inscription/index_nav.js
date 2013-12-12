@@ -12,5 +12,6 @@ $('#area_list li a').click( function(e){
 		$("#location_info" ).empty();
 		$("#sub_location_info" ).empty();
 		$("#inscription_info" ).empty();
+		clean_all_locations();
 	}
 });
