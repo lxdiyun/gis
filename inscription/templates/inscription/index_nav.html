@@ -1,7 +1,6 @@
 <ul class="nav nav-tabs" id="area_list">
-	<li class="active"><a href="#">总览</a></li>
 	{% for area in areas %}
-	<li><a href="#" id="{{ area.id }}">{{ area.name }}</a></li>
+	<li {% if area.id == 1 %} class="active"{% endif %}><a href="#" id="{{ area.id }}">{{ area.name }}</a></li>
 	{% endfor %}
 </ul>
 

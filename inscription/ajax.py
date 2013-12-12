@@ -9,7 +9,7 @@ from models import Area, Location, SubLocation, Inscription
 
 
 @dajaxice_register
-def display_area(request, area_id=None):
+def display_area(request, area_id):
     area = None
     locations = None
 
@@ -17,12 +17,13 @@ def display_area(request, area_id=None):
         id = int(area_id)
         try:
             area = Area.objects.get(id=id)
-            locations = area.location_set.all()
+            if 1 != id:
+                locations = area.location_set.all()
+            else:
+                locations = Location.objects.all()
+
         except ObjectDoesNotExist:
             area = None
-
-    else:
-        locations = Location.objects.all()
 
     render = render_to_string('inscription/intra_area_info.html',
                               {'area': area})
