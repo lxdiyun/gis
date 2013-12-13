@@ -9,10 +9,10 @@
 
 {% block extra_head %}
 {{ block.super }}
+
 {% dajaxice_js_import %}
 
 {% include "utils/prettyPhoto/head.html" %}
-
 {% endblock %}
 
 
@@ -32,10 +32,13 @@
 
 <script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}inscription/location.js"></script>
 
 {% include "utils/prettyPhoto/tail.html" %}
 
 <script type="text/javascript">
-$(document).ready(index_init);
+$(document).ready(location_init);
 </script>
 {% endblock%}
