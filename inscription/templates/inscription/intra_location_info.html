@@ -5,14 +5,16 @@
 {% endif %}
 
 <div class="col-xs-8">
-	<ul class="nav nav-pills nav-stacked" id="sub_location_list">
-		{% for sub_loc in location.sublocation_set.all %}
-		<li><a class="" id="{{ sub_loc.id }}" href="#sub_location_info">{{ sub_loc }}</a></li>
+	<ul class="nav nav-pills nav-stacked" id="sublocation_list">
+		{% for subloc in location.sublocation_set.all %}
+		<li><a class="" id="{{ subloc.id }}" href="{{ subloc.get_absolute_url }}">{{ subloc }}</a></li>
 		{% endfor %}
 	</ul>
 </div>
 
 
+{% if 'GET' != request.META.REQUEST_METHOD %}
 <script type="text/javascript">
 {% include "inscription/intra_location_info.js" %}
 </script>
+{% endif %}

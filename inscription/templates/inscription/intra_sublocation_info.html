@@ -1,0 +1,17 @@
+<h3>{{ sublocation.name }}</h3>
+
+{% if sublocation.description %}
+<p><strong>简介:</strong>{{ sublocation.description }}</p>
+{% endif  %}
+
+	<div class="list-group" id="inscription_list">
+		{% for inscription in sublocation.inscription_set.all %}
+		<a class="list-group-item" id="{{ inscription.id }}" href="{{ inscription.get_absolute_url }}">{{ inscription }}</a>
+		{% endfor %}
+	</div>
+
+{% if 'GET' != request.META.REQUEST_METHOD %}
+<script type="text/javascript">
+{% include "inscription/intra_sublocation_info.js" %}
+</script>
+{% endif %}

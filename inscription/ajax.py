@@ -7,6 +7,8 @@ from dajaxice.decorators import dajaxice_register
 
 from models import Area, Location, SubLocation, Inscription
 
+MAX_LOCATIONS_ON_INDEX = 15
+
 
 @dajaxice_register
 def display_area(request, area_id):
@@ -20,7 +22,9 @@ def display_area(request, area_id):
             if 1 != id:
                 locations = area.location_set.all()
             else:
-                locations = Location.objects.all()
+                # randomly get locations at most
+                locations = Location.objects.all().order_by('?')
+                locations = locations[:MAX_LOCATIONS_ON_INDEX]
 
         except ObjectDoesNotExist:
             area = None
@@ -54,20 +58,20 @@ def display_location(request, location_id):
 
 
 @dajaxice_register
-def display_sub_location(request, sub_location_id):
-    id = int(sub_location_id)
-    sub_location = None
+def display_sublocation(request, sublocation_id):
+    id = int(sublocation_id)
+    sublocation = None
 
     try:
-        sub_location = SubLocation.objects.get(id=id)
+        sublocation = SubLocation.objects.get(id=id)
     except ObjectDoesNotExist:
-        sub_location = None
+        sublocation = None
 
-    render = render_to_string('inscription/intra_sub_location_info.html',
-                              {'sub_location': sub_location})
+    render = render_to_string('inscription/intra_sublocation_info.html',
+                              {'sublocation': sublocation})
 
     dajax = Dajax()
-    dajax.assign('#sub_location_info', 'innerHTML', render)
+    dajax.assign('#sublocation_info', 'innerHTML', render)
     return dajax.json()
 
 
@@ -75,7 +79,6 @@ def display_sub_location(request, sub_location_id):
 def display_inscription(request, inscription_id):
     id = int(inscription_id)
     inscription = None
-    photos = None
 
     try:
         inscription = Inscription.objects.get(id=id)

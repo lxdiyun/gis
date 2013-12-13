@@ -26,6 +26,9 @@ class Location(PointBase):
     def __unicode__(self):
         return smart_unicode(self.name)
 
+    def get_absolute_url(self):
+                return reverse("location_detail", kwargs={'pk': self.id})
+
 
 class SubLocation(models.Model):
     name = models.CharField(max_length=100)
@@ -36,6 +39,9 @@ class SubLocation(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.name)
+
+    def get_absolute_url(self):
+                return reverse("sublocation_detail", kwargs={'pk': self.id})
 
 
 class Inscription(models.Model):

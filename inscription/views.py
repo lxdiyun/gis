@@ -1,8 +1,9 @@
-from utils.views import GmapViewBase
+from utils.views import GmapContextMixin
+from django.views.generic import TemplateView
 from models import Area
 
 
-class IndexView(GmapViewBase):
+class IndexView(TemplateView, GmapContextMixin):
     template_name = "inscription/index.html"
 
     def get_context_data(self, **kwargs):

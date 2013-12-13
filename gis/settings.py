@@ -114,7 +114,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/adli/gis/media/'
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyC0EnKraozzSAB8B5fqSN3w-vFWChYdWIQ'
-GOOGLE_MAPS_API_URL = 'http://ditu.google.cn/maps/api/js'
+GOOGLE_MAPS_API_URL = 'http://ditu.google.com/maps/api/js'
 
 # DEBUG_TOOLBAR_CONFIG
 if DEBUG is True:

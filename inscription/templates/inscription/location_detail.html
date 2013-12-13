@@ -3,8 +3,9 @@
 {% load dajaxice_templatetags %}
 
 
-{% block title %}汕头埠宗教碑铭地理信息系统{% endblock title %}
+{% block title %}汕头埠宗教碑铭地理信息系统 - {{ location }}{% endblock title %}
 
+{% block inscription_list %} class="active" {% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -15,29 +16,17 @@
 {% endblock %}
 
 
-{% block index %} class="active" {% endblock %}
-
-
 {% block content %}
 <div class="container">
-	{% include "inscription/index_nav.html" %}
-	<div class="row" id="area_info">
-	</div>
-
 	<div class="row">
-		<div class="col-xs-12 col-sm-8">
-			<div class="popin">
-				<div style="height:320px" id="map">
+		<div class="col-xs-12 col-sm-8" id="location_info">
+			{% include "inscription/intra_location_info.html" %}
+		</div>
+		<div class="col-xs-12 col-sm-4" >
+				<div class="popin">
+					<div style="height:240px" id="map">
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-4" id="location_info">
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-3" id="sublocation_info">
-		</div>
-		<div class="col-xs-12 col-sm-9" id="inscription_info">
 		</div>
 	</div>
 </div>
@@ -45,18 +34,18 @@
 
 
 {% block extra_tail %}
+
 <script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
 
 <script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
 
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/index.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/index_nav.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}inscription/location.js"></script>
 
 {% include "utils/prettyPhoto/tail.html" %}
 
 <script type="text/javascript">
-$(document).ready(index_init);
+$(document).ready(location_init);
 </script>
 {% endblock%}

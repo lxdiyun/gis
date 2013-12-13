@@ -6,6 +6,15 @@
 		{% endif %}
 	</div>
 	<div class="col-xs-12 col-sm-6" id="inscription_info">
+		
+		{% if 'GET' == request.META.REQUEST_METHOD %}
+		<div class="col-xs-12" >
+			<div class="popin">
+				<div style="height:240px" id="map">
+				</div>
+			</div>
+		</div>
+		{% endif %}
 		{% with inscription.photos.all as photos %}
 		{% if photos.count  %}
 		<h5>图片:</h5> 
