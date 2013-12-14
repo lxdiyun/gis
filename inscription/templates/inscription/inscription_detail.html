@@ -18,9 +18,40 @@
 
 {% block content %}
 <div class="container">
+	{% with  inscription.location.location.area  as area  %}
+	{% with  inscription.location.location  as location  %}
+	{% with  inscription.location as sub_location  %}
+	<ol class="breadcrumb">
+		<li><a href="#">碑文列表</a></li>
+		<li><a href="{{ area.get_absolute_url }}">{{ area }}</a></li>
+		<li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
+		<li><a href="{{ sub_location.get_absolute_url }}">{{ sub_location }}</a></li>
+		<li class="active">{{ inscription }}</li>
+	</ol>
+	{% endwith %}
+	{% endwith %}
+	{% endwith %}
+
 	<div class="row">
-		<div class="col-xs-12 col-sm-12" id="inscription_info">
-			{% include "inscription/intra_inscription_info.html" %}
+		<div class="col-xs-12" id="inscription_info">
+			<h4>{{ inscription.name }}</h4>
+		</div>
+		<div class="col-xs-12 col-sm-4" id="inscription_info">
+			<div class="popin">
+				<div style="height:240px" id="map">
+				</div>
+			</div>
+			{% with inscription.photos.all as photos %}
+			{% if photos.count  %}
+			<h5>图片:</h5> 
+			{% include "inscription/intra_photos.html" %}
+			{% endif %}
+			{% endwith %}
+		</div>
+		<div class="col-xs-12 col-sm-8" id="sub_location_info">
+			{% if inscription.description %}
+			<div class="well well-lg">{{ inscription.description|linebreaks }}</div>
+			{% endif %}
 		</div>
 	</div>
 </div>
@@ -39,6 +70,7 @@
 {% include "utils/prettyPhoto/tail.html" %}
 
 <script type="text/javascript">
+{% include "utils/prettyPhoto/init.js" %}
 $(document).ready(location_init);
 </script>
 {% endblock%}

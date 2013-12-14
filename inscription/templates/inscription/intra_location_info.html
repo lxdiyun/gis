@@ -1,7 +1,9 @@
+{% if 'GET' != request.META.REQUEST_METHOD %}
 <h2>{{ location.name }}</h2>
+{% endif %}
 <p><strong>地址:</strong>{{ location.address }}</p>
 {% if location.description %}
-<p><strong>简介:</strong>{{ location.description }}</p>
+<p>{{ location.description }}</p>
 {% endif %}
 
 <div class="col-xs-8">
