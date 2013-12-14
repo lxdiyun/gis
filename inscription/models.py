@@ -15,6 +15,9 @@ class Area(models.Model):
     def __unicode__(self):
         return smart_unicode(self.name)
 
+    def get_absolute_url(self):
+                return reverse("area_detail", kwargs={'pk': self.id})
+
 
 class Location(PointBase):
     name = models.CharField(max_length=100)

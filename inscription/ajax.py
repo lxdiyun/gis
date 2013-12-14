@@ -35,7 +35,7 @@ def display_area(request, area_id):
     if locations is not None:
         data = serializers.serialize("json", locations)
         dajax.add_data(data, 'add_locations')
-    dajax.assign('#area_info', 'innerHTML', render)
+    dajax.assign('#area_or_location_info', 'innerHTML', render)
     return dajax.json()
 
 
@@ -53,7 +53,7 @@ def display_location(request, location_id):
                               {'location': location})
 
     dajax = Dajax()
-    dajax.assign('#location_info', 'innerHTML', render)
+    dajax.assign('#area_or_location_info', 'innerHTML', render)
     return dajax.json()
 
 

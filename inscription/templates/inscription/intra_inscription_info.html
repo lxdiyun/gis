@@ -1,42 +1,18 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-6" id="sub_location_info">
-		<h4>{{ inscription.name }}</h4>
-		{% if inscription.description %}
-		<div class="well well-lg">{{ inscription.description|linebreaks }}</div>
-		{% endif %}
-	</div>
-	<div class="col-xs-12 col-sm-6" id="inscription_info">
-		
-		{% if 'GET' == request.META.REQUEST_METHOD %}
-		<div class="col-xs-12" >
-			<div class="popin">
-				<div style="height:240px" id="map">
-				</div>
-			</div>
-		</div>
-		{% endif %}
-		{% with inscription.photos.all as photos %}
-		{% if photos.count  %}
-		<h5>图片:</h5> 
-		<div id="links text-right" class="row">
-			{% for photo in photos %}
-			<div class="col-xs-3 col-sm-3 text-center">
-				<a  href="{{ photo.image.url }}" rel="prettyPhoto[inscription]" title="{{ photo.description }}">
-					<img class="img-thumbnail box-shadow" src="{{ photo.thumbnail.url }}" alt="{{ photo.name }}" />
-					<div class="caption">
-						{{ photo.name }}
-					</div>
-				</a>
-			</div>
-			{% endfor %}
-		</div>
-		{% endif %}
-		{% endwith %}
-	</div>
+<div class="col-xs-12 col-sm-6" id="sub_location_info">
+	<h4>{{ inscription.name }}</h4>
+	{% if inscription.description %}
+	<div class="well well-lg">{{ inscription.description|linebreaks }}</div>
+	{% endif %}
+</div>
+<div class="col-xs-12 col-sm-6" id="inscription_info">
+	{% with inscription.photos.all as photos %}
+	{% if photos.count  %}
+	<h5>图片:</h5> 
+	{% include "inscription/intra_photos.html" %}
+	{% endif %}
+	{% endwith %}
 </div>
 
 <script type="text/javascript" charset="utf-8">
 {% include "utils/prettyPhoto/init.js" %}
 </script>
-
-

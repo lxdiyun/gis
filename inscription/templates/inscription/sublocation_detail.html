@@ -18,15 +18,29 @@
 
 {% block content %}
 <div class="container">
+	{% with  sublocation.location.area  as area  %}
+	{% with  sublocation.location as location  %}
+	<ol class="breadcrumb">
+		<li><a href="#">碑文列表</a></li>
+		<li><a href="{{ area.get_absolute_url }}">{{ area }}</a></li>
+		<li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
+		<li class="active">{{ sublocation }}</li>
+	</ol>
+	{% endwith %}
+	{% endwith %}
+
 	<div class="row">
-		<div class="col-xs-12 col-sm-8" id="sublocation_info">
-			{% include "inscription/intra_sublocation_info.html" %}
+		<div class="col-xs-12" >
+			<h4>{{ sublocation.name }}</h4>
 		</div>
 		<div class="col-xs-12 col-sm-4" >
-				<div class="popin">
-					<div style="height:240px" id="map">
-					</div>
+			<div class="popin">
+				<div style="height:240px" id="map">
 				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-8" id="sublocation_info">
+			{% include "inscription/intra_sublocation_info.html" %}
 		</div>
 	</div>
 </div>

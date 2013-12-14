@@ -1,5 +1,6 @@
+{% if 'GET' != request.META.REQUEST_METHOD %}
 <h3>{{ sublocation.name }}</h3>
-
+{% endif %}
 {% if sublocation.description %}
 <p><strong>简介:</strong>{{ sublocation.description }}</p>
 {% endif  %}
