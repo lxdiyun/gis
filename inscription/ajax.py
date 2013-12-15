@@ -81,7 +81,7 @@ def display_inscription(request, inscription_id):
     inscription = None
 
     try:
-        inscription = Inscription.objects.get(id=id)
+        inscription = Inscription.objects.prefetch_related('photos').get(id=id)
     except ObjectDoesNotExist:
         inscription = None
 

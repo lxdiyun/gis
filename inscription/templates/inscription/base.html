@@ -19,7 +19,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li {% block  index %} {% endblock %}><a href="{% url 'inscription_index' %}">地图</a></li>
-				<li {% block  inscription_list %} {% endblock %}><a href="#">碑铭列表</a></li>
+				<li {% block  inscription_list %} {% endblock %}><a href="{% url 'inscription_list' %}">碑铭列表</a></li>
 			</ul>
 				<form class="navbar-form" role="search" action="#" method="POST">
 					<div class="input-group col-xs-12 col-sm-3">
