@@ -1,6 +1,7 @@
 from utils.views import GmapContextMixin
 from django.views.generic import TemplateView
-from models import Area
+from models import *
+from utils.views import DetailViewWithGmap
 
 
 class IndexView(TemplateView, GmapContextMixin):
@@ -14,3 +15,37 @@ class IndexView(TemplateView, GmapContextMixin):
         context['areas'] = areas
 
         return context
+
+
+class LocationDetailView(DetailViewWithGmap):
+    model = Location
+
+    def get_queryset(self):
+        queryset = super(LocationDetailView, self).get_queryset()
+        queryset = queryset.select_related('area')
+
+        return queryset
+
+
+class SubLocationDetailView(DetailViewWithGmap):
+    model = SubLocation
+
+    def get_queryset(self):
+        queryset = super(SubLocationDetailView, self).get_queryset()
+        queryset = queryset.select_related('location',
+                                           'location__area')
+
+        return queryset
+
+
+class InscriptionDetailView(DetailViewWithGmap):
+    model = Inscription
+
+    def get_queryset(self):
+        queryset = super(InscriptionDetailView, self).get_queryset()
+        queryset = queryset.select_related('location',
+                                           'location__location',
+                                           'location__location__area')
+        queryset = queryset.prefetch_related('photos')
+
+        return queryset
