@@ -1,0 +1,56 @@
+{% extends "inscription/base.html" %}
+
+{% load dajaxice_templatetags %}
+
+
+{% block title %}汕头埠宗教碑铭地理信息系统{% endblock title %}
+
+{% block inscription_list %} class="active" {% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+
+{% dajaxice_js_import %}
+
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+	<ul>
+		{% for area in areas %}
+		<li>
+		<a href="{{ area.get_absolute_url }}">{{ area }}</a>
+		<ul>
+			{% for location in area.location_set.all  %}
+			<li>
+			<a href="{{ location.get_absolute_url }}">{{ location }}</a>
+			<ul>
+				{% for sublocation in location.sublocation_set.all  %}
+				<li>
+				<a href="{{ sublocation.get_absolute_url }}">{{ sublocation }}</a>
+				<ul>
+					{% for inscription in sublocation.inscription_set.all %}
+					<li><a href="{{ inscription.get_absolute_url }}">{{ inscription }}</a></li>
+					{% endfor %}
+				</ul>
+				</li>
+				{% endfor %}
+			</ul>
+			</li>
+			{% endfor %}
+		</ul>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock content %}
+
+
+{% block extra_tail %}
+<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
+
+<script type="text/javascript">
+</script>
+{% endblock%}

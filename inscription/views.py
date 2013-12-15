@@ -17,6 +17,20 @@ class IndexView(TemplateView, GmapContextMixin):
         return context
 
 
+class InscriptionListView(TemplateView):
+    template_name = "inscription/inscription_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(InscriptionListView,
+                        self).get_context_data(**kwargs)
+
+        areas = Area.objects.all()[1:]
+
+        context['areas'] = areas
+
+        return context
+
+
 class LocationDetailView(DetailViewWithGmap):
     model = Location
 
