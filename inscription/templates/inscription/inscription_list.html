@@ -30,7 +30,7 @@
 				{% for sublocation in location.sublocation_set.all  %}
 				<li>
 				<a href="{{ sublocation.get_absolute_url }}">{{ sublocation }}</a>
-				<ul>
+				<ul class="nav nav-pills">
 					{% for inscription in sublocation.inscription_set.all %}
 					<li><a href="{{ inscription.get_absolute_url }}">{{ inscription }}</a></li>
 					{% endfor %}
