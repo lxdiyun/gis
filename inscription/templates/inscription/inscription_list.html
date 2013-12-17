@@ -26,19 +26,23 @@
 			{% for location in area.location_set.all  %}
 			<li>
 			<a href="{{ location.get_absolute_url }}">{{ location }}</a>
-			<ul>
-				{% for sublocation in location.sublocation_set.all  %}
-				<li>
-				<a href="{{ sublocation.get_absolute_url }}">{{ sublocation }}</a>
-				<ul class="nav nav-pills">
-					{% for inscription in sublocation.inscription_set.all %}
-					<li><a href="{{ inscription.get_absolute_url }}">{{ inscription }}</a></li>
+			<div  id="accordion">
+				<ul>
+					{% for sublocation in location.sublocation_set.all  %}
+					<li>
+					<a data-toggle="collapse" data-parent="#accordion" href="#sublocation{{ sublocation.id }}">{{ sublocation }}</a>
+					<div id="sublocation{{ sublocation.id }}" class="collapse">
+						<ul class="nav nav-pills">
+							{% for inscription in sublocation.inscription_set.all %}
+							<li><a href="{{ inscription.get_absolute_url }}">{{ inscription }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+					</li>
 					{% endfor %}
 				</ul>
+			</div>
 				</li>
-				{% endfor %}
-			</ul>
-			</li>
 			{% endfor %}
 		</ul>
 		</li>
