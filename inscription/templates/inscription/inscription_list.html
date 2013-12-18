@@ -18,36 +18,26 @@
 
 {% block content %}
 <div class="container">
-	<ul>
+	<div class = "row">
 		{% for area in areas %}
-		<li>
-		<a href="{{ area.get_absolute_url }}">{{ area }}</a>
-		<ul>
-			{% for location in area.location_set.all  %}
-			<li>
-			<a href="{{ location.get_absolute_url }}">{{ location }}</a>
-			<div  id="accordion">
-				<ul>
-					{% for sublocation in location.sublocation_set.all  %}
-					<li>
-					<a data-toggle="collapse" data-parent="#accordion" href="#sublocation{{ sublocation.id }}">{{ sublocation }}</a>
-					<div id="sublocation{{ sublocation.id }}" class="collapse">
-						<ul class="nav nav-pills">
-							{% for inscription in sublocation.inscription_set.all %}
-							<li><a href="{{ inscription.get_absolute_url }}">{{ inscription }}</a></li>
-							{% endfor %}
-						</ul>
-					</div>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-				</li>
-			{% endfor %}
-		</ul>
-		</li>
+		{% if forloop.counter  %}
+
+		{% endif %}
+		<div class="col-xs-12 col-sm-4 text-center">
+			<img class="img-thumbnail" style="width: 280px; height: 140px;" src="{{ STATIC_URL }}/inscription/test/images{{ forloop.counter }}.jpg">
+			<h3>{{ area }}</h3>
+			<p> {{ area.description }}</p>
+			<p>
+			<a class="btn btn-primary"href="{{ area.get_absolute_url }}">查看详细 »</a>
+			</p>
+		</div>
+		{% if forloop.counter|divisibleby:3 and not forloop.last %}
+		</div>
+		<hr>
+		<div class="row">
+		{% endif %}
 		{% endfor %}
-	</ul>
+	</div>
 </div>
 {% endblock content %}
 
