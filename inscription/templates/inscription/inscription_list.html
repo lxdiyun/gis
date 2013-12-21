@@ -3,7 +3,7 @@
 {% load dajaxice_templatetags %}
 
 
-{% block title %}汕头埠宗教碑铭地理信息系统{% endblock title %}
+{% block title %}碑铭列表{% endblock title %}
 
 {% block inscription_list %} class="active" {% endblock %}
 
@@ -20,9 +20,9 @@
 <div class="container">
 	<div class = "row">
 		{% for area in areas %}
-		<div class="col-xs-12 col-sm-4 text-center">
+		<div class="col-xs-12 col-sm-4 block-center">
 			<a href="{{ area.get_absolute_url }}" class="btn btn-lg  btn-block">
-				<img class="img-thumbnail" style="width: 80%; height: 140px;" src="{{ STATIC_URL }}/inscription/test/images{{ forloop.counter }}.jpg">
+				<img class="img-thumbnail" style="" src="{% if area.cover %} {{ area.cover_thumbnail.url }} {% endif %}">
 				<div class="caption">
 					<h3><i>{{ area }}</i></h3>
 				</div>
