@@ -3,7 +3,19 @@ from django.contrib.contenttypes import generic
 from django.utils.encoding import smart_unicode
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+
+from imagekit.models import ImageSpecField
+from imagekit.processors import SmartResize
+
 from utils.models import PointBase, PhotoBase
+
+
+class Photo(PhotoBase):
+    image = models.ImageField(upload_to='inscription_photo',
+                              verbose_name=_('Image'))
+    description = models.TextField(blank=True,
+                                   null=True,
+                                   verbose_name=_("description"))
 
 
 class Area(models.Model):
@@ -11,6 +23,15 @@ class Area(models.Model):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
+    cover = models.ImageField(upload_to='inscription_area_cover',
+                              blank=True,
+                              null=True,
+                              verbose_name=_('cover'))
+    cover_thumbnail = ImageSpecField(source='cover',
+                                     processors=[SmartResize(320,
+                                                             180)],
+                                     format='JPEG',
+                                     options={'quality': 60})
 
     def __unicode__(self):
         return smart_unicode(self.name)
@@ -62,9 +83,3 @@ class Inscription(models.Model):
 
     def get_absolute_url(self):
                 return reverse("inscription_detail", kwargs={'pk': self.id})
-
-
-class Photo(PhotoBase):
-    description = models.TextField(blank=True,
-                                   null=True,
-                                   verbose_name=_("description"))
