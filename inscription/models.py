@@ -11,8 +11,6 @@ from utils.models import PointBase, PhotoBase
 
 
 class Photo(PhotoBase):
-    image = models.ImageField(upload_to='inscription_photo',
-                              verbose_name=_('Image'))
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
