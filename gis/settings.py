@@ -40,9 +40,11 @@ INSTALLED_APPS = (
     'dajaxice',
     'dajax',
     'imagekit',
+    'haystack',
     'utils',
     'inscription',
     'debug_toolbar',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -121,7 +123,7 @@ if DEBUG is True:
     INTERNAL_IPS = ('127.00.0.1', '10.0.2.2')
 
     def custom_show_toolbar(request):
-        return False  # Always show toolbar, for example purposes only.
+        return True  # Always show toolbar, for example purposes only.
 
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
@@ -168,4 +170,13 @@ LOGGING = {
             'propagate': True,
         }
     }
+}
+
+# haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
 }

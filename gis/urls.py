@@ -16,6 +16,7 @@ urlpatterns = patterns('',
                            include('dajaxice.urls')),
 
                        url(r'^admin/', include(admin.site.urls)),
+                       url(r'^search/', include('haystack.urls')),
                        url(r'', include('inscription.urls')),
                        )
 
