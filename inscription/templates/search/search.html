@@ -2,22 +2,13 @@
 
 {% load highlight %}
 
+{% block title %}搜索结果{% endblock title %}
+
 {% block content %}
 <div class="container">
 	<form method="get" action=".">
-		<div class="row">
-			<div class="input-group col-sm-2">
-				<input name="q" id="id_q" type="text" class="form-control" data-provide="typeahead" value="{{ form.cleaned_data.q }}">
-				<div class="input-group-btn">
-					<button class="btn btn-info" style="" type="submit">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</div>
-			</div>
-		</div>
-
 		{% if query %}
-		<h3>Results</h3>
+		<h3>搜索结果</h3>
 
 		{% for result in page.object_list %}
 		<p>

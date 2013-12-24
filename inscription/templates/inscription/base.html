@@ -22,16 +22,15 @@
 				<li {% block  inscription_list %} {% endblock %}><a href="{% url 'inscription_list' %}">碑铭列表</a></li>
 			</ul>
 			<div class="col-xs-12  col-sm-4">
-				<form class="navbar-form " role="search" action="#" method="POST">
+				<form class="navbar-form " role="search" action="{% url 'haystack_search' %}" method="GET">
 					<div class="input-group">
-						<input class="form-control"  type="text" placeholder="搜索碑铭" name="keyword">
+						<input class="form-control" name="q" id="id_q" type="text" data-provide="typeahead" placeholder="搜索碑铭" value="{{ form.cleaned_data.q }}">
 						<div class="input-group-btn">
 							<button class="btn btn-info" style="" type="submit">
 								<span class="glyphicon glyphicon-search"></span>
 							</button>
 						</div>
 					</div>
-					{% csrf_token %}
 				</form>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
