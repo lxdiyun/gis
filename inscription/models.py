@@ -9,7 +9,6 @@ from imagekit.processors import SmartResize
 
 from utils.models import PointBase, PhotoBase
 
-
 class Photo(PhotoBase):
     description = models.TextField(blank=True,
                                    null=True,
@@ -35,7 +34,7 @@ class Area(models.Model):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("area_detail", kwargs={'pk': self.id})
+        return reverse("area_detail", kwargs={'pk': self.id})
 
 
 class Location(PointBase):
@@ -49,7 +48,7 @@ class Location(PointBase):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("location_detail", kwargs={'pk': self.id})
+        return reverse("location_detail", kwargs={'pk': self.id})
 
 
 class SubLocation(models.Model):
@@ -63,7 +62,7 @@ class SubLocation(models.Model):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("sublocation_detail", kwargs={'pk': self.id})
+        return reverse("sublocation_detail", kwargs={'pk': self.id})
 
 
 class Inscription(models.Model):
@@ -80,4 +79,4 @@ class Inscription(models.Model):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("inscription_detail", kwargs={'pk': self.id})
+        return reverse("inscription_detail", kwargs={'pk': self.id})
