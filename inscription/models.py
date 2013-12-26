@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 
-from utils.models import PointBase, PhotoBase
+from utils.models import PointBase, PhotoBase, random_path_and_rename
 
 class Photo(PhotoBase):
     description = models.TextField(blank=True,
@@ -20,7 +20,8 @@ class Area(models.Model):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
-    cover = models.ImageField(upload_to='inscription_area_cover',
+    cover = models.ImageField(upload_to=
+                              random_path_and_rename('inscription_area_cover'),
                               blank=True,
                               null=True,
                               verbose_name=_('cover'))
