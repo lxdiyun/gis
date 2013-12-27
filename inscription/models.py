@@ -9,6 +9,7 @@ from imagekit.processors import SmartResize
 
 from utils.models import PointBase, PhotoBase, random_path_and_rename
 
+
 class Photo(PhotoBase):
     description = models.TextField(blank=True,
                                    null=True,
