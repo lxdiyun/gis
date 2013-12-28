@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 
-from utils.models import PointBase, PhotoBase
+from utils.models import PointBase, PhotoBase, random_path_and_rename
 
 
 class Photo(PhotoBase):
@@ -21,7 +21,8 @@ class Area(models.Model):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
-    cover = models.ImageField(upload_to='inscription_area_cover',
+    cover = models.ImageField(upload_to=
+                              random_path_and_rename('inscription_area_cover'),
                               blank=True,
                               null=True,
                               verbose_name=_('cover'))
@@ -35,7 +36,7 @@ class Area(models.Model):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("area_detail", kwargs={'pk': self.id})
+        return reverse("area_detail", kwargs={'pk': self.id})
 
 
 class Location(PointBase):
@@ -49,7 +50,7 @@ class Location(PointBase):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("location_detail", kwargs={'pk': self.id})
+        return reverse("location_detail", kwargs={'pk': self.id})
 
 
 class SubLocation(models.Model):
@@ -63,7 +64,7 @@ class SubLocation(models.Model):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("sublocation_detail", kwargs={'pk': self.id})
+        return reverse("sublocation_detail", kwargs={'pk': self.id})
 
 
 class Inscription(models.Model):
@@ -80,4 +81,4 @@ class Inscription(models.Model):
         return smart_unicode(self.name)
 
     def get_absolute_url(self):
-                return reverse("inscription_detail", kwargs={'pk': self.id})
+        return reverse("inscription_detail", kwargs={'pk': self.id})

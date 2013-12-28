@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -99,8 +100,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/home/adli/gis/static/'
+STATIC_URL = '/website/static/'
+STATIC_ROOT = '/home/www/gis/static/'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -112,8 +113,8 @@ STATICFILES_FINDERS = (
 )
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/adli/gis/media/'
+MEDIA_URL = '/website/media/'
+MEDIA_ROOT = '/home/www/gis/media/'
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyC0EnKraozzSAB8B5fqSN3w-vFWChYdWIQ'
 GOOGLE_MAPS_API_URL = 'http://ditu.google.com/maps/api/js'
@@ -126,7 +127,7 @@ if DEBUG is True:
         return True  # Always show toolbar, for example purposes only.
 
     DEBUG_TOOLBAR_CONFIG = {
-        'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+#        'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
         'TAG': 'body',
     }
 
@@ -182,3 +183,8 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_CUSTOM_HIGHLIGHTER = "utils.haystack.highlighting.CompleteHighlighter"
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# dajaxice js file endpoint fix
+if len(sys.argv) > 1:
+    if 'collectstatic' == sys.argv[1]:
+        DAJAXICE_MEDIA_PREFIX = 'website/dajaxice'
