@@ -132,54 +132,61 @@ if DEBUG is True:
     }
 
 # logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+if DEBUG:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {
+                'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            },
+            'simple': {
+                'format': '%(levelname)s %(message)s'
+            },
         },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
+        'handlers': {
+            'null': {
+                'level': 'DEBUG',
+                'class': 'logging.NullHandler',
+            },
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose'
+            },
         },
-    },
-    'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['null'],
-            'propagate': True,
-            'level': 'INFO',
-        },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-        'dajaxice': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'propagate': True,
+                'level': 'INFO',
+            },
+            'django.request': {
+                'handlers': ['console'],
+                'level': 'ERROR',
+                'propagate': False,
+            },
+            'dajaxice': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': True,
+            }
         }
     }
-}
 
 # haystack
 HAYSTACK_CONNECTIONS = {
+    # whoosh
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'haystack',
-    },
+                'ENGINE': 'utils.haystack.backends.zh_whoosh_backend.WhooshEngine',
+                'PATH': os.path.join(os.path.dirname(__file__), '../whoosh_index'),
+            },
+    # elasticsearch
+#    'default': {
+#        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+#        'URL': 'http://127.0.0.1:9200/',
+#        'INDEX_NAME': 'haystack',
+#    },
 }
 #HAYSTACK_CUSTOM_HIGHLIGHTER = "utils.haystack.highlighting.CompleteHighlighter"
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

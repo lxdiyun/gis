@@ -1,6 +1,7 @@
 
 /static
 /media
+/whoosh_index
 
 *.py[cod]
 
