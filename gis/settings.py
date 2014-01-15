@@ -145,10 +145,6 @@ if DEBUG:
             },
         },
         'handlers': {
-            'null': {
-                'level': 'DEBUG',
-                'class': 'logging.NullHandler',
-            },
             'console': {
                 'level': 'DEBUG',
                 'class': 'logging.StreamHandler',
@@ -156,11 +152,6 @@ if DEBUG:
             },
         },
         'loggers': {
-            'django': {
-                'handlers': ['console'],
-                'propagate': True,
-                'level': 'INFO',
-            },
             'django.request': {
                 'handlers': ['console'],
                 'level': 'ERROR',
@@ -178,7 +169,7 @@ if DEBUG:
 HAYSTACK_CONNECTIONS = {
     # whoosh
     'default': {
-                'ENGINE': 'utils.haystack.backends.zh_whoosh_backend.WhooshEngine',
+                'ENGINE': 'utils.haystack.backends.zh_yaha_whoosh_backend.WhooshEngine',
                 'PATH': os.path.join(os.path.dirname(__file__), '../whoosh_index'),
             },
     # elasticsearch
