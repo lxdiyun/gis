@@ -3,6 +3,10 @@ from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 from django.conf import settings
 from django.conf.urls.static import static
 
+#import guppy
+#from guppy.heapy import Remote
+#Remote.on()
+
 dajaxice_autodiscover()
 
 from django.contrib import admin

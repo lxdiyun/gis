@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
 
-from utils.models import PointBase, PhotoBase, random_path_and_rename
+from utils.models import PointBase, PhotoBase
+from utils.utils import random_path_and_rename
 
 
 class Photo(PhotoBase):

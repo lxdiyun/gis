@@ -169,7 +169,7 @@ if DEBUG:
 HAYSTACK_CONNECTIONS = {
     # whoosh
     'default': {
-                'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+                'ENGINE': 'utils.haystack.backends.zh_yaha_whoosh_backend.WhooshEngine',
                 'PATH': os.path.join(os.path.dirname(__file__), '../whoosh_index'),
             },
     # elasticsearch
