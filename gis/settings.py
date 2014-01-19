@@ -180,16 +180,16 @@ HAYSTACK_CONNECTIONS = {
 #    },
 }
 #HAYSTACK_CUSTOM_HIGHLIGHTER = "utils.haystack.highlighting.CompleteHighlighter"
-#HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # dajaxice js file endpoint fix
 if len(sys.argv) > 1:
     if 'collectstatic' == sys.argv[1]:
         DAJAXICE_MEDIA_PREFIX = 'website/dajaxice'
-    elif 'rebuild_index' == sys.argv[1]:
-        HAYSTACK_CONNECTIONS = {
-            'default': {
-                'ENGINE': 'utils.haystack.backends.zh_whoosh_backend.WhooshEngine',
-                'PATH': os.path.join(os.path.dirname(__file__), '../whoosh_index'),
-            },
-        }
+#    elif 'rebuild_index' == sys.argv[1]:
+#        HAYSTACK_CONNECTIONS = {
+#            'default': {
+#                'ENGINE': 'utils.haystack.backends.zh_whoosh_backend.WhooshEngine',
+#                'PATH': os.path.join(os.path.dirname(__file__), '../whoosh_index'),
+#            },
+#        }
