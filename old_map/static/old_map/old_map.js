@@ -37,7 +37,7 @@ function get_1949_tile (coord, zoom) {
 		); 
 	var inter = mapBounds_1949.intersects(tileBounds);
 	if (mapBounds_1949.intersects(tileBounds) && (zoom >= mapMinZoom_1949) && (zoom <= mapMaxZoom_1949))
-		return "/website/static/old_map/1949/" +
+		return "/website/static/old_map/map_data/1949/" +
 			+ zoom + "/" + coord.x + "/" + (Math.pow(2, zoom)-coord.y-1) + ".png";
 	else
 		return "http://www.maptiler.org/img/none.png"; 
