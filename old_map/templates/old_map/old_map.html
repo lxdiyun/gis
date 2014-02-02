@@ -1,0 +1,55 @@
+{% extends "inscription/base.html" %}
+
+{% load dajaxice_templatetags %}
+
+
+{% block title %}旧地图{% endblock title %}
+
+
+{% block extra_head %}
+{{ block.super }}
+
+{% dajaxice_js_import %}
+
+{% include "utils/prettyPhoto/head.html" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">
+			<div class="popin">
+				<div style="height:320px" id="map">
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4" id="area_or_location_info">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-3" id="sublocation_info">
+		</div>
+		<div class="col-xs-12 col-sm-9" id="inscription_info">
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
+
+{% block extra_tail %}
+<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
+
+<script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
+<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}OpacityControl/ExtDraggableObject.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}old_map/old_map.js"></script>
+
+{% include "utils/prettyPhoto/tail.html" %}
+
+<script type="text/javascript">
+$(document).ready(old_map_init);
+</script>
+{% endblock%}

@@ -2,6 +2,7 @@
 /static
 /media
 /whoosh_index
+/old_map/static/old_map/map_data
 
 *.py[cod]
 

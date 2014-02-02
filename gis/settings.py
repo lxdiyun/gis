@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'haystack',
     'utils',
     'inscription',
+    'old_map',
     'debug_toolbar',
     'django_extensions',
 )
@@ -117,17 +118,17 @@ MEDIA_URL = '/website/media/'
 MEDIA_ROOT = '/home/www/gis/media/'
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyC0EnKraozzSAB8B5fqSN3w-vFWChYdWIQ'
-GOOGLE_MAPS_API_URL = 'http://ditu.google.com/maps/api/js'
+GOOGLE_MAPS_API_URL = 'http://ditu.google.cn/maps/api/js'
 
 # DEBUG_TOOLBAR_CONFIG
 if DEBUG is True:
     INTERNAL_IPS = ('127.00.0.1', '10.0.2.2')
 
     def custom_show_toolbar(request):
-        return True  # Always show toolbar, for example purposes only.
+        return False  # Always show toolbar, for example purposes only.
 
     DEBUG_TOOLBAR_CONFIG = {
-#        'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+        'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
         'TAG': 'body',
     }
 

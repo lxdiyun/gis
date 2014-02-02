@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^search/', include('haystack.urls')),
+                       url(r'^old_map/', include('old_map.urls')),
                        url(r'', include('inscription.urls')),
                        )
 
