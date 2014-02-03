@@ -1,5 +1,4 @@
-var initialOpacity = 40;
-var OPACITY_MAX_PIXELS = 57; // Width of opacity control image
+var MAP_1949_ID = 0
 
 var mapMinZoom_1949 = 13;
 var mapMaxZoom_1949 = 18;
@@ -18,13 +17,19 @@ var mapBounds_1949 = new google.maps.LatLngBounds(
 function old_map_init() {
 	load_map();
 	map.fitBounds(mapBounds_1949);
-	map.map.overlayMapTypes.insertAt('1949', map_1949);
 	$('#map').fadeOut('fast');
 	$('#map').fadeIn('slow');
 
 
-	// Add opacity control and set initial value
-	createOpacityControl(map.map, initialOpacity);
+	init_map_button();
+	init_slider();
+
+	show_1949_map();
+}
+
+function show_1949_map() {
+	map.map.overlayMapTypes.insertAt(MAP_1949_ID, map_1949);
+	map_1949.setOpacity($('#map_opacity_slider').slider('getValue')/100);
 }
 
 
@@ -43,56 +48,25 @@ function get_1949_tile (coord, zoom) {
 		return "http://www.maptiler.org/img/none.png"; 
 }
 
-function createOpacityControl(map, opacity) {
-	var sliderImageUrl = "/website/static/OpacityControl/opacity-slider3d14.png";
-
-	// Create main div to hold the control.
-	var opacityDiv = document.createElement('DIV');
-	opacityDiv.setAttribute("style", "margin:5px;overflow-x:hidden;overflow-y:hidden;background:url(" + sliderImageUrl + ") no-repeat;width:71px;height:21px;cursor:pointer;");
-
-	// Create knob
-	var opacityKnobDiv = document.createElement('DIV');
-	opacityKnobDiv.setAttribute("style", "padding:0;margin:0;overflow-x:hidden;overflow-y:hidden;background:url(" + sliderImageUrl + ") no-repeat -71px 0;width:14px;height:21px;");
-	opacityDiv.appendChild(opacityKnobDiv);
-
-	var opacityCtrlKnob = new ExtDraggableObject(opacityKnobDiv, {
-		restrictY: true,
-	    container: opacityDiv
-	});
-
-	var dragEndEvent = google.maps.event.addListener(opacityCtrlKnob, "dragend", function () {
-		setOpacity(opacityCtrlKnob.valueX());
-	});
-
-	var clickEvent = google.maps.event.addDomListener(opacityDiv, "click", function (e) {
-		var left = findPosLeft(this);
-		var x = e.pageX - left - 5; // - 5 as we're using a margin of 5px on the div
-		opacityCtrlKnob.setValueX(x);
-		setOpacity(x);
-	});
-
-	map.controls[google.maps.ControlPosition.TOP_RIGHT].push(opacityDiv);
-
-	// Set initial value
-	var initialValue = OPACITY_MAX_PIXELS / (100 / opacity);
-	opacityCtrlKnob.setValueX(initialValue);
-	setOpacity(initialValue);
-}
-
-function setOpacity(pixelX) {
-	// Range = 0 to OPACITY_MAX_PIXELS
-	var value = (1 / OPACITY_MAX_PIXELS) * pixelX;
-	if (value < 0) value = 0;
-	map_1949.setOpacity(value);
-}
-
-function findPosLeft(obj) {
-	var curleft = 0;
-	if (obj.offsetParent) {
-		do {
-			curleft += obj.offsetLeft;
-		} while (obj = obj.offsetParent);
-		return curleft;
+function init_map_button() {
+	$("#1949_toggle").click(function() {
+	if (! $(this).hasClass('active')) {
+		show_1949_map();
 	}
-	return undefined;
+	else {
+		map.map.overlayMapTypes.removeAt(MAP_1949_ID);
+	}
+});
+}
+
+
+function init_slider() {
+	$('#map_opacity_slider').slider({
+		formater: function(value) {
+			return '透明度：' + value + "%";
+		}
+	});
+	$("#map_opacity_slider").on('slide', function(slideEvt) {
+		map_1949.setOpacity(slideEvt.value/100);
+	});
 }

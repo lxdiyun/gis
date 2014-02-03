@@ -8,6 +8,8 @@
 
 {% block extra_head %}
 {{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap-slider/css/bootstrap-slider.min.css">
+
 
 {% dajaxice_js_import %}
 
@@ -18,13 +20,19 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-sm-8">
+		<div class="col-xs-12">
 			<div class="popin">
-				<div style="height:320px" id="map">
+				<div style="height:480px" id="map">
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-4" id="area_or_location_info">
+	</div>
+	<div class="row">
+		<div class="col-xs-1 vcenter">
+			<button id="1949_toggle" type="button" class="btn btn-info active" data-toggle="button">1949</button>
+		</div>
+		<div class="col-xs-2 col-xs-push-9 vcenter">
+				<input id="map_opacity_slider" data-slider-id='slider_id_map_opacity' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
 		</div>
 	</div>
 	<div class="row">
@@ -44,6 +52,7 @@
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}OpacityControl/ExtDraggableObject.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bootstrap-slider/bootstrap-slider.min.js"></script>
 
 <script type="text/javascript" src="{{ STATIC_URL }}old_map/old_map.js"></script>
 
