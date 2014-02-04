@@ -28,11 +28,41 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-1 vcenter">
-			<button id="1949_toggle" type="button" class="btn btn-info active" data-toggle="button">1949</button>
+		<div class="btn-toolbar col-xs-12 col-sm-8 vcenter" role="toolbar">
+			<div class="btn-group">
+				<button id="show_full_map" type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-th-large"></span>
+				</button>
+				<button id="zoom_in" type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-zoom-in"></span>
+				</button>
+				<button id="zoom_out" type="button" class="btn btn-default">
+					<span class="glyphicon glyphicon-zoom-out"></span>
+				</button>
+			</div>
+			<div class="btn-group map_buttons" data-toggle="buttons">
+				<label class="btn btn-info active">
+					<input id="map_1949" type="radio" name="map_button">1949
+				</label>
+				<label class="btn btn-info">
+					<input id="" type="radio" name="map_button">1959
+				</label>
+				<label class="btn btn-info">
+					<input id="" type="radio" name="map_button">1969
+				</label>
+				<label class="btn btn-info">
+					<input id="" type="radio" name="map_button">1979
+				</label>
+				<label class="btn btn-info">
+					<input id="map_1949" type="radio" name="map_button">1989
+				</label>
+				<label class="btn btn-default">
+					<input id="" type="radio" name="map_button">现代
+				</label>
+			</div>
 		</div>
-		<div class="col-xs-2 col-xs-push-9 vcenter">
-				<input id="map_opacity_slider" data-slider-id='slider_id_map_opacity' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+		<div class="col-xs-12 col-sm-1 col-sm-offset-2 vcenter">
+				<input id="opacity_slider" data-slider-id='slider_id_map_opacity' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="85"/>
 		</div>
 	</div>
 	<div class="row">
