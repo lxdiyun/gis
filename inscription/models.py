@@ -4,17 +4,20 @@ from django.utils.encoding import smart_unicode
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from imagekit.models import ImageSpecField
 from imagekit.processors import SmartResize
+from imagekit.models import ImageSpecField
 
 from utils.models import PointBase, PhotoBase
-from utils.utils import random_path_and_rename
 
 
 class Photo(PhotoBase):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
+    thumbnail_cover = ImageSpecField(source='image',
+                                     processors=[SmartResize(320, 180)],
+                                     format='JPEG',
+                                     options={'quality': 60})
 
 
 class Area(models.Model):
@@ -22,16 +25,9 @@ class Area(models.Model):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
-    cover = models.ImageField(upload_to=
-                              random_path_and_rename('inscription_area_cover'),
-                              blank=True,
-                              null=True,
-                              verbose_name=_('cover'))
-    cover_thumbnail = ImageSpecField(source='cover',
-                                     processors=[SmartResize(320,
-                                                             180)],
-                                     format='JPEG',
-                                     options={'quality': 60})
+    photos = generic.GenericRelation('Photo',
+                                     content_type_field='content_type',
+                                     object_id_field='object_id')
 
     def __unicode__(self):
         return smart_unicode(self.name)
@@ -45,6 +41,9 @@ class Location(PointBase):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
+    photos = generic.GenericRelation('Photo',
+                                     content_type_field='content_type',
+                                     object_id_field='object_id')
     area = models.ForeignKey(Area)
 
     def __unicode__(self):
@@ -59,6 +58,9 @@ class SubLocation(models.Model):
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
+    photos = generic.GenericRelation('Photo',
+                                     content_type_field='content_type',
+                                     object_id_field='object_id')
     location = models.ForeignKey(Location)
 
     def __unicode__(self):

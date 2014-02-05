@@ -128,7 +128,7 @@ if DEBUG is True:
         return False  # Always show toolbar, for example purposes only.
 
     DEBUG_TOOLBAR_CONFIG = {
-        'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+#        'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
         'TAG': 'body',
     }
 

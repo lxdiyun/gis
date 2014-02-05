@@ -22,7 +22,7 @@
 		{% for area in areas %}
 		<div class="col-xs-12 col-sm-4 block-center">
 			<a href="{{ area.get_absolute_url }}" class="btn btn-lg  btn-block">
-				<img class="img-thumbnail" style="" src="{% if area.cover %} {{ area.cover_thumbnail.url }} {% endif %}">
+				<img class="img-thumbnail" style="" src="{{ area.cover.thumbnail_cover.url }}">
 				<div class="caption">
 					<h3><i>{{ area }}</i></h3>
 				</div>

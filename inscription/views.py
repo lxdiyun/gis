@@ -5,6 +5,7 @@ from utils.views import GmapContextMixin
 
 from models import *
 
+
 class IndexView(TemplateView, GmapContextMixin):
     template_name = "inscription/index.html"
 
@@ -25,7 +26,12 @@ class InscriptionListView(TemplateView):
         context = super(InscriptionListView,
                         self).get_context_data(**kwargs)
 
-        areas = Area.objects.all()[1:]
+        areas = Area.objects.all().prefetch_related('photos')[1:]
+
+        for area in areas:
+            photos = area.photos.all()
+            if photos:
+                area.cover = photos[0]
 
         context['areas'] = areas
 
