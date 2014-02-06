@@ -17,8 +17,6 @@ function add_listener(marker, infowindow) {
 
 function display_location(id) {
 	Dajaxice.inscription.display_location(Dajax.process,{'location_id':id});
-	$("#sublocation_info" ).fadeOut('fast');
-	$("#inscription_info" ).fadeOut('fast');
-	$("#sublocation_info" ).empty();
-	$("#inscription_info" ).empty();
+	$("#photos_or_sublocation_info" ).fadeOut('fast');
+	$("#photos_or_sublocation_info" ).empty();
 }

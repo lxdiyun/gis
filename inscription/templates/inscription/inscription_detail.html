@@ -1,76 +1,25 @@
-{% extends "inscription/base.html" %}
+{% extends "inscription/object_detail.html" %}
 
-{% load dajaxice_templatetags %}
+{% block title %}{{ inscription }}{% endblock title %}
 
+{% block breadcrumb %}
+{% with  inscription.location.location.area  as area  %}
+{% with  inscription.location.location  as location  %}
+{% with  inscription.location as sublocation  %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'inscription_list' %}">碑文列表</a></li>
+	<li><a href="{{ area.get_absolute_url }}">{{ area }}</a></li>
+	<li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
+	<li><a href="{{ sublocation.get_absolute_url }}">{{ sublocation }}</a></li>
+	<li class="active">{{ inscription }}</li>
+</ol>
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endblock breadcrumb %}
 
-{% block title %}汕头埠宗教碑铭地理信息系统 - {{ inscription }}{% endblock title %}
-
-{% block inscription_list %} class="active" {% endblock %}
-
-{% block extra_head %}
-{{ block.super }}
-
-{% dajaxice_js_import %}
-
-{% include "utils/prettyPhoto/head.html" %}
+{% block object_detail %}
+{% if inscription.description %}
+<div class="well well-lg">{{ inscription.description|linebreaks }}</div>
+{% endif %}
 {% endblock %}
-
-
-{% block content %}
-<div class="container">
-	{% with  inscription.location.location.area  as area  %}
-	{% with  inscription.location.location  as location  %}
-	{% with  inscription.location as sublocation  %}
-	<ol class="breadcrumb">
-		<li><a href="{% url 'inscription_list' %}">碑文列表</a></li>
-		<li><a href="{{ area.get_absolute_url }}">{{ area }}</a></li>
-		<li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
-		<li><a href="{{ sublocation.get_absolute_url }}">{{ sublocation }}</a></li>
-		<li class="active">{{ inscription }}</li>
-	</ol>
-	{% endwith %}
-	{% endwith %}
-	{% endwith %}
-
-	<div class="row">
-		<div class="col-xs-12" id="inscription_info">
-			<h4>{{ inscription.name }}</h4>
-		</div>
-		<div class="col-xs-12 col-sm-4" id="inscription_info">
-			<div class="popin">
-				<div style="height:240px" id="map">
-				</div>
-			</div>
-			{% with inscription.photos.all as photos %}
-			{% if photos.count  %}
-			<h5>图片:</h5> 
-			{% include "inscription/intra_photos.html" %}
-			{% endif %}
-			{% endwith %}
-		</div>
-		<div class="col-xs-12 col-sm-8" id="inscription_info">
-			{% if inscription.description %}
-			<div class="well well-lg">{{ inscription.description|linebreaks }}</div>
-			{% endif %}
-		</div>
-	</div>
-</div>
-{% endblock content %}
-
-
-{% block extra_tail %}
-<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
-
-<script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
-<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/location.js"></script>
-
-{% include "utils/prettyPhoto/tail.html" %}
-
-<script type="text/javascript">
-{% include "utils/prettyPhoto/init.js" %}
-$(document).ready(location_init);
-</script>
-{% endblock%}

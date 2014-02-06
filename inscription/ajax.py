@@ -29,13 +29,17 @@ def display_area(request, area_id):
         except ObjectDoesNotExist:
             area = None
 
-    render = render_to_string('inscription/intra_area_info.html',
-                              {'area': area})
+    render_area = render_to_string('inscription/intra_area_info.html',
+                                   {'area': area})
+    render_photos = render_to_string('inscription/intra_photos.html',
+                                     {'photos': area.photos.all()})
     dajax = Dajax()
     if locations is not None:
         data = serializers.serialize("json", locations)
         dajax.add_data(data, 'add_locations')
-    dajax.assign('#area_or_location_info', 'innerHTML', render)
+    dajax.assign('#area_or_location_info', 'innerHTML', render_area)
+    dajax.assign('#photos_or_sublocation_info', 'innerHTML', render_photos)
+
     return dajax.json()
 
 
@@ -49,11 +53,15 @@ def display_location(request, location_id):
     except ObjectDoesNotExist:
         location = None
 
-    render = render_to_string('inscription/intra_location_info.html',
-                              {'location': location})
+    render_location = render_to_string('inscription/intra_location_info.html',
+                                       {'location': location})
+    render_photos = render_to_string('inscription/intra_photos.html',
+                                     {'photos': location.photos.all()})
 
     dajax = Dajax()
-    dajax.assign('#area_or_location_info', 'innerHTML', render)
+    dajax.assign('#area_or_location_info', 'innerHTML', render_location)
+    dajax.assign('#photos_or_sublocation_info', 'innerHTML', render_photos)
+
     return dajax.json()
 
 
@@ -71,7 +79,7 @@ def display_sublocation(request, sublocation_id):
                               {'sublocation': sublocation})
 
     dajax = Dajax()
-    dajax.assign('#sublocation_info', 'innerHTML', render)
+    dajax.assign('#photos_or_sublocation_info', 'innerHTML', render)
     return dajax.json()
 
 

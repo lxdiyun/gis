@@ -6,13 +6,6 @@
 </div>
 <div class="col-xs-12 col-sm-6">
 	{% with inscription.photos.all as photos %}
-	{% if photos.count  %}
-	<h5>图片:</h5> 
 	{% include "inscription/intra_photos.html" %}
-	{% endif %}
 	{% endwith %}
 </div>
-
-<script type="text/javascript" charset="utf-8">
-{% include "utils/prettyPhoto/init.js" %}
-</script>

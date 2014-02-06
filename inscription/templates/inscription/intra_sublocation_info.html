@@ -1,15 +1,22 @@
-{% if 'GET' != request.META.REQUEST_METHOD %}
-<h3>{{ sublocation.name }}</h3>
-{% endif %}
-{% if sublocation.description %}
-<p><strong>简介:</strong>{{ sublocation.description }}</p>
-{% endif  %}
+<div class="col-xs-12 col-sm-3" id="sublocation_info">
+	{% if 'GET' != request.META.REQUEST_METHOD %}
+	<h3>{{ sublocation.name }}</h3>
+	{% endif %}
+	{% if sublocation.description %}
+	<p><strong>简介:</strong>{{ sublocation.description }}</p>
+	{% endif  %}
 
 	<div class="list-group" id="inscription_list">
 		{% for inscription in sublocation.inscription_set.all %}
 		<a class="list-group-item" id="{{ inscription.id }}" href="{{ inscription.get_absolute_url }}">{{ inscription }}</a>
 		{% endfor %}
 	</div>
+</div>
+<div class="col-xs-12 col-sm-9" id="inscription_info">
+	{% with sublocation.photos.all as photos %}
+	{% include "inscription/intra_photos.html" %}
+	{% endwith %}
+</div>
 
 {% if 'GET' != request.META.REQUEST_METHOD %}
 <script type="text/javascript">

@@ -1,66 +1,19 @@
-{% extends "inscription/base.html" %}
-
-{% load dajaxice_templatetags %}
+{% extends "inscription/object_detail.html" %}
 
 
-{% block title %}汕头埠宗教碑铭地理信息系统 - {{ area }}{% endblock title %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'inscription_list' %}">碑文列表</a></li>
+	<li class="active">{{ area }}</li>
+</ol>
+{% endblock breadcrumb %}
 
-{% block inscription_list %} class="active" {% endblock %}
-
-{% block extra_head %}
+{% block  object_detail %}
 {{ block.super }}
-
-{% dajaxice_js_import %}
-
-{% include "utils/prettyPhoto/head.html" %}
-{% endblock %}
-
-
-{% block content %}
-<div class="container">
-	<ol class="breadcrumb">
-		<li><a href="{% url 'inscription_list' %}">碑文列表</a></li>
-		<li class="active">{{ area }}</li>
-	</ol>
-
-	<div class="row">
-		<div class="col-xs-12" >
-			<h4>{{ area.name }}</h4>
-		</div>
-		<div class="col-xs-12 col-sm-4" >
-			<div class="popin">
-				<div style="height:240px" id="map">
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-8" id="area_info">
-			{% if area.description %}
-			<p>{{ area.description }}</p>
-			<ul class="nav nav-pills" id="area_list">
-				{% for location in area.location_set.all %}
-				<li><a href="{{ location.get_absolute_url }}" >{{ location.name }}</a></li>
-				{% endfor %}
-			</ul>
-			{% endif %}
-		</div>
-	</div>
+<ul class="nav nav-pills" id="area_list">
+	{% for location in area.location_set.all %}
+	<li><a href="{{ location.get_absolute_url }}" >{{ location.name }}</a></li>
+	{% endfor %}
+</ul>
 </div>
-{% endblock content %}
-
-
-{% block extra_tail %}
-
-<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
-
-<script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
-<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/location.js"></script>
-
-{% include "utils/prettyPhoto/tail.html" %}
-
-<script type="text/javascript">
-$(document).ready(location_init);
-</script>
-{% endblock%}
+{% endblock object_detail %}

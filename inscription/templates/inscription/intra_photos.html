@@ -1,3 +1,5 @@
+{% if photos %}
+<h5>图片:</h5> 
 <div id="links text-right" class="row">
 	{% for photo in photos %}
 	<div class="col-xs-3 col-sm-3 text-center">
@@ -10,3 +12,11 @@
 	</div>
 	{% endfor %}
 </div>
+
+{% if 'GET' != request.META.REQUEST_METHOD %}
+<script type="text/javascript" charset="utf-8">
+{% include "utils/prettyPhoto/init.js" %}
+</script>
+{% endif %}
+
+{% endif %}

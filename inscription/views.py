@@ -44,6 +44,7 @@ class LocationDetailView(DetailViewWithGmap):
     def get_queryset(self):
         queryset = super(LocationDetailView, self).get_queryset()
         queryset = queryset.select_related('area')
+        queryset = queryset.prefetch_related('photos')
 
         return queryset
 
@@ -55,6 +56,7 @@ class SubLocationDetailView(DetailViewWithGmap):
         queryset = super(SubLocationDetailView, self).get_queryset()
         queryset = queryset.select_related('location',
                                            'location__area')
+        queryset = queryset.prefetch_related('photos')
 
         return queryset
 

@@ -1,39 +1,43 @@
 {% extends "inscription/base.html" %}
 
-{% load dajaxice_templatetags %}
 
+{% block title %}{{ object }}{% endblock title %}
 
-{% block title %}汕头埠宗教碑铭地理信息系统{% endblock title %}
-
+{% block inscription_list %} class="active" {% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
 
 <link rel="stylesheet" href="{{ STATIC_URL }}prettyPhoto/css/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
-
-{% dajaxice_js_import %}
-
 {% endblock %}
-
-
-{% block index %} class="active" {% endblock %}
 
 
 {% block content %}
 <div class="container">
-	{% include "inscription/index_nav.html" %}
+	{% block breadcrumb %}
+		
+	{% endblock %}
 
 	<div class="row">
-		<div class="col-xs-12 col-sm-8">
+		<div class="col-xs-12" id="inscription_info">
+			<h4>{{ object.name }}</h4>
+		</div>
+		<div class="col-xs-12 col-sm-4" id="inscription_info">
 			<div class="popin">
-				<div style="height:320px" id="map">
+				<div style="height:240px" id="map">
 				</div>
 			</div>
+			{% with object.photos.all as photos %}
+			{% include "inscription/intra_photos.html" %}
+			{% endwith %}
 		</div>
-		<div class="col-xs-12 col-sm-4" id="area_or_location_info">
+		<div class="col-xs-12 col-sm-8" id="object_info">
+			{% block object_detail %}
+			{% if object.description %}
+			<p><div class="well well-lg">{{ object.description }}</div></p>
+			{% endif %}
+			{% endblock %}
 		</div>
-	</div>
-	<div class="row" id="photos_or_sublocation_info">
 	</div>
 </div>
 {% endblock content %}
@@ -41,7 +45,6 @@
 
 {% block extra_tail %}
 {{ block.super }}
-<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
 
 <script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
 <script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
@@ -49,10 +52,10 @@
 
 <script type="text/javascript" src="{{ STATIC_URL }}prettyPhoto/js/jquery.prettyPhoto.js"></script>
 
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/index.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/index_nav.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}inscription/location.js"></script>
 
 <script type="text/javascript">
-$(document).ready(index_init);
+{% include "utils/prettyPhoto/init.js" %}
+$(document).ready(location_init);
 </script>
 {% endblock%}

@@ -1,64 +1,24 @@
-{% extends "inscription/base.html" %}
-
-{% load dajaxice_templatetags %}
+{% extends "inscription/object_detail.html" %}
 
 
-{% block title %}汕头埠宗教碑铭地理信息系统 - {{ sublocation }}{% endblock title %}
-
-{% block inscription_list %} class="active" {% endblock %}
-
-{% block extra_head %}
-{{ block.super }}
-
-{% dajaxice_js_import %}
-
-{% include "utils/prettyPhoto/head.html" %}
+{% block breadcrumb %}
+{% with  sublocation.location.area  as area  %}
+{% with  sublocation.location as location  %}
+<ol class="breadcrumb">
+	<li><a href="{% url 'inscription_list' %}">碑文列表</a></li>
+	<li><a href="{{ area.get_absolute_url }}">{{ area }}</a></li>
+	<li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
+	<li class="active">{{ sublocation }}</li>
+</ol>
+{% endwith %}
+{% endwith %}
 {% endblock %}
 
-
-{% block content %}
-<div class="container">
-	{% with  sublocation.location.area  as area  %}
-	{% with  sublocation.location as location  %}
-	<ol class="breadcrumb">
-		<li><a href="{% url 'inscription_list' %}">碑文列表</a></li>
-		<li><a href="{{ area.get_absolute_url }}">{{ area }}</a></li>
-		<li><a href="{{ location.get_absolute_url }}">{{ location }}</a></li>
-		<li class="active">{{ sublocation }}</li>
-	</ol>
-	{% endwith %}
-	{% endwith %}
-
-	<div class="row">
-		<div class="col-xs-12" >
-			<h4>{{ sublocation.name }}</h4>
-		</div>
-		<div class="col-xs-12 col-sm-4" >
-			<div class="popin">
-				<div style="height:240px" id="map">
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-8" id="sublocation_info">
-			{% include "inscription/intra_sublocation_info.html" %}
-		</div>
-	</div>
+{% block object_detail %}
+{{ block.super }}
+<div class="list-group" id="inscription_list">
+	{% for inscription in sublocation.inscription_set.all %}
+	<a class="list-group-item" id="{{ inscription.id }}" href="{{ inscription.get_absolute_url }}">{{ inscription }}</a>
+	{% endfor %}
 </div>
-{% endblock content %}
-
-
-{% block extra_tail %}
-<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
-
-<script type="text/javascript" src="{{ GOOGLE_MAPS_API_URL }}?key={{ GOOGLE_MAPS_API_KEY }}&sensor=false&language=zh-CN"> </script>
-<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}utils/gmaps_utils.js"></script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}inscription/location.js"></script>
-
-{% include "utils/prettyPhoto/tail.html" %}
-
-<script type="text/javascript">
-$(document).ready(location_init);
-</script>
-{% endblock%}
+{% endblock object_detail %}
