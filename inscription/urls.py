@@ -1,7 +1,5 @@
 from django.conf.urls import patterns, url
-from utils.views import DetailViewWithGmap
 from django.views.generic import TemplateView
-from models import *
 from views import *
 
 
@@ -17,7 +15,7 @@ urlpatterns = patterns('',
                                template_name="inscription/about_us.html"),
                            name='about_us'),
                        url(r'^area/(?P<pk>\d+)$',
-                           DetailViewWithGmap.as_view(model=Area),
+                           AreaDetailView.as_view(),
                            name='area_detail'),
                        url(r'^location/(?P<pk>\d+)$',
                            LocationDetailView.as_view(),

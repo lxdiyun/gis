@@ -7,11 +7,9 @@ $('#area_list li a').click( function(e){
 		Dajaxice.inscription.display_area(Dajax.process,{'area_id':id});
 
 		$("#area_or_location_info" ).fadeOut('fast');
-		$("#sublocation_info" ).fadeOut('fast');
-		$("#inscription_info" ).fadeOut('fast');
+		$("#photos_or_sublocation_info" ).fadeOut('fast');
 		$("#area_or_location_info" ).empty();
-		$("#sublocation_info" ).empty();
-		$("#inscription_info" ).empty();
+		$("#photos_or_sublocation_info" ).empty();
 		clean_all_markers();
 	}
 });

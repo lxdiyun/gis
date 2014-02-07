@@ -1,5 +1,6 @@
 function index_init() {
 	// map
+	g_bounds_min_zoom = 15;
 	load_map();
 	$('#map').fadeOut('fast');
 	$('#map').fadeIn('slow');
@@ -7,12 +8,23 @@ function index_init() {
 	Dajaxice.inscription.display_area(Dajax.process, {'area_id':1});
 }
 
-function add_listener(marker, infowindow) {
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(marker.title);
-		infowindow.open(marker.get('map'), marker);
-		display_location(marker.id)
-	});
+function display_location_with_marker(marker) {
+	display_location(marker.id);
+}
+
+function add_locations(data) {
+	var locations = $.parseJSON(data);
+	var infowindow = new google.maps.InfoWindow();
+
+	for (var i = 0; i < locations.length; ++i) {
+		var loc = locations[i].fields;
+		add_marker(locations[i].pk, 
+			   loc.latitude, 
+			   loc.longitude, 
+			   loc.name,
+			   display_location_with_marker,
+			   infowindow)
+	};
 }
 
 function display_location(id) {

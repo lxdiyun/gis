@@ -1,5 +1,13 @@
 {% extends "inscription/object_detail.html" %}
 
+{% load dajaxice_templatetags %}
+
+{% block extra_head %}
+{{ block.super }}
+
+{% dajaxice_js_import %}
+
+{% endblock extra_head %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb">
@@ -17,3 +25,27 @@
 </ul>
 </div>
 {% endblock object_detail %}
+
+{% block extra_tail %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}dajax_modified/jquery.dajax.core.js"></script>
+<script type="text/javascript">
+add_marker_hook = function () {
+	Dajaxice.inscription.display_area_detail(Dajax.process, {'area_id':"{{ area.id }}"});
+};
+function area_detail_add_locations(data) {
+	var locations = $.parseJSON(data);
+	var infowindow = new google.maps.InfoWindow();
+
+	for (var i = 0; i < locations.length; ++i) {
+		var loc = locations[i].fields;
+		add_marker(locations[i].pk, 
+			   loc.latitude, 
+			   loc.longitude, 
+			   loc.name,
+			   null,
+			   infowindow)
+	};
+}
+</script>
+{% endblock extra_tail %}

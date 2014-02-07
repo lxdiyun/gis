@@ -22,3 +22,13 @@
 	{% endfor %}
 </div>
 {% endblock object_detail %}
+
+{% block  extra_tail%}
+{{ block.super }}
+
+<script type="text/javascript">
+{% with  sublocation.location as location  %}
+{% include "inscription/object_detail_add_marker_hook.js" %}
+{% endwith %}
+</script>
+{% endblock extra_tail %}

@@ -38,6 +38,16 @@ class InscriptionListView(TemplateView):
         return context
 
 
+class AreaDetailView(DetailViewWithGmap):
+    model = Area
+
+    def get_queryset(self):
+        queryset = super(AreaDetailView, self).get_queryset()
+        queryset = queryset.prefetch_related('photos')
+
+        return queryset
+
+
 class LocationDetailView(DetailViewWithGmap):
     model = Location
 

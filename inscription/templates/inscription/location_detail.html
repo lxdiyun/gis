@@ -19,3 +19,11 @@
 	{% endfor %}
 </ul>
 {% endblock object_detail %}
+
+{% block extra_tail %}
+{{ block.super }}
+
+<script type="text/javascript">
+{% include "inscription/object_detail_add_marker_hook.js" %}
+</script>
+{% endblock extra_tail %}

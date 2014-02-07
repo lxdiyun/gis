@@ -23,3 +23,13 @@
 <div class="well well-lg">{{ inscription.description|linebreaks }}</div>
 {% endif %}
 {% endblock %}
+
+{% block  extra_tail%}
+{{ block.super }}
+
+<script type="text/javascript">
+{% with  inscription.location.location as location  %}
+{% include "inscription/object_detail_add_marker_hook.js" %}
+{% endwith %}
+</script>
+{% endblock extra_tail %}

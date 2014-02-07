@@ -10,8 +10,7 @@ from models import Area, Location, SubLocation, Inscription
 MAX_LOCATIONS_ON_INDEX = 15
 
 
-@dajaxice_register
-def display_area(request, area_id):
+def get_area_and_locations(area_id):
     area = None
     locations = None
 
@@ -29,6 +28,26 @@ def display_area(request, area_id):
         except ObjectDoesNotExist:
             area = None
 
+        return [area, locations]
+
+
+@dajaxice_register
+def display_area_detail(request, area_id):
+    area, locations = get_area_and_locations(area_id)
+
+    dajax = Dajax()
+    if locations is not None:
+        data = serializers.serialize("json", locations)
+        dajax.add_data(data, 'area_detail_add_locations')
+        dajax.add_data(None, 'zoom_to_show_all_markers')
+
+    return dajax.json()
+
+
+@dajaxice_register
+def display_area(request, area_id):
+    area, locations = get_area_and_locations(area_id)
+
     render_area = render_to_string('inscription/intra_area_info.html',
                                    {'area': area})
     render_photos = render_to_string('inscription/intra_photos.html',
@@ -37,6 +56,7 @@ def display_area(request, area_id):
     if locations is not None:
         data = serializers.serialize("json", locations)
         dajax.add_data(data, 'add_locations')
+        dajax.add_data(None, 'zoom_to_show_all_markers')
     dajax.assign('#area_or_location_info', 'innerHTML', render_area)
     dajax.assign('#photos_or_sublocation_info', 'innerHTML', render_photos)
 
