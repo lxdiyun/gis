@@ -21,7 +21,7 @@ class Photo(PhotoBase):
 
 
 class Area(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name=_("name"))
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
@@ -35,9 +35,13 @@ class Area(models.Model):
     def get_absolute_url(self):
         return reverse("area_detail", kwargs={'pk': self.id})
 
+    class Meta:
+        verbose_name = _("Area")
+        verbose_name_plural = _("Areas")
+
 
 class Location(PointBase):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name=_("name"))
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
@@ -52,9 +56,13 @@ class Location(PointBase):
     def get_absolute_url(self):
         return reverse("location_detail", kwargs={'pk': self.id})
 
+    class Meta:
+        verbose_name = _("Location")
+        verbose_name_plural = _("Locations")
+
 
 class SubLocation(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name=_("name"))
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
@@ -69,9 +77,13 @@ class SubLocation(models.Model):
     def get_absolute_url(self):
         return reverse("sublocation_detail", kwargs={'pk': self.id})
 
+    class Meta:
+        verbose_name = _("Sub Location")
+        verbose_name_plural = _("Sub Locations")
+
 
 class Inscription(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name=_("name"))
     description = models.TextField(blank=True,
                                    null=True,
                                    verbose_name=_("description"))
@@ -85,3 +97,7 @@ class Inscription(models.Model):
 
     def get_absolute_url(self):
         return reverse("inscription_detail", kwargs={'pk': self.id})
+
+    class Meta:
+        verbose_name = _("Inscription")
+        verbose_name_plural = _("Inscriptions")
