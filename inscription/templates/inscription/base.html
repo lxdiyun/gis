@@ -53,3 +53,17 @@
 	</div>
 </footer>
 {% endblock %}
+
+{% block extra_tail %}
+<script>
+$(document).ready(function() {
+  var head = document.getElementsByTagName('head')[0];
+  var origAppend = head.appendChild;
+  head.appendChild = function(s) {
+    if (s && s.src && s.src.toString().match(/maps\.googleapis\.com/)) s.src = s.src.replace('maps.googleapis.com','ditu.google.cn');
+    origAppend.call(head,s);
+  };
+});
+</script>
+  
+{% endblock extra_tail %}
